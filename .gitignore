@@ -4,3 +4,8 @@
 /FLASH
 /Documentation
 /Generated_Code
+/.settings
+/RemoteSystemsTempFiles
+/*.traceConfig
+/*.apconfig
+/doxy_generated
