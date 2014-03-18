@@ -33,6 +33,7 @@
 #include "LED1.h"
 #include "LEDpin1.h"
 #include "BitIoLdd1.h"
+#include "TU1.h"
 #include "LED2.h"
 #include "LEDpin2.h"
 #include "BitIoLdd2.h"
@@ -40,6 +41,12 @@
 #include "LEDpin3.h"
 #include "BitIoLdd3.h"
 #include "WAIT1.h"
+#include "CS1.h"
+#include "TI1.h"
+#include "TimerIntLdd1.h"
+#include "HF1.h"
+#include "SW1.h"
+#include "BitIoLdd4.h"
 /* Including shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
@@ -59,14 +66,18 @@ int main(void)
   /*** End of Processor Expert internal initialization.                    ***/
 
   /* Write your code here */
-  for(;;) {					/* XXX Endlos RGB-LED leuchten lassen */
-        LED1_Neg();
-        WAIT1_Waitms(100);
-        LED2_Neg();
-        WAIT1_Waitms(100);
-        LED3_Neg();
-        WAIT1_Waitms(100); 
-      }
+#if 0
+  for(;;) {
+    LED1_Neg();
+    WAIT1_Waitms(100);
+    LED2_Neg();
+    WAIT1_Waitms(100);
+    LED3_Neg();
+    WAIT1_Waitms(100);
+  }
+#else
+  APP_Run();
+#endif
   /* For example: for(;;) { } */
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/

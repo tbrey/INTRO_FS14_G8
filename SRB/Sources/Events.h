@@ -45,7 +45,41 @@
 #include "LED5.h"
 #include "LEDpin5.h"
 #include "WAIT1.h"
+#include "CS1.h"
+#include "TI1.h"
+#include "KB1.h"
 
+
+void KB1_OnInterrupt(void);
+/*
+** ===================================================================
+**     Event       :  KB1_OnInterrupt (module Events)
+**
+**     Component   :  KB1 [KBI]
+**     Description :
+**         This event is called when the active signal edge/level
+**         occurs. This event is enabled only if <Interrupt
+**         service/event> property is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void TI1_OnInterrupt(void);
+/*
+** ===================================================================
+**     Event       :  TI1_OnInterrupt (module Events)
+**
+**     Component   :  TI1 [TimerInt]
+**     Description :
+**         When a timer interrupt occurs this event is called (only
+**         when the component is enabled - <Enable> and the events are
+**         enabled - <EnableEvent>). This event is enabled only if a
+**         <interrupt service/event> is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
 
 /* END Events */
 #endif /* __Events_H*/

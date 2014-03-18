@@ -41,6 +41,9 @@
 #include "LED5.h"
 #include "LEDpin5.h"
 #include "WAIT1.h"
+#include "CS1.h"
+#include "TI1.h"
+#include "KB1.h"
 /* Include shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
@@ -58,6 +61,7 @@ void main(void)
   /*** End of Processor Expert internal initialization.                    ***/
 
   /* Write your code here */
+#if 0
   for(;;) {					/* XXX Endlos Lauflicht laufen lassen */
          LED1_Neg();
          WAIT1_Waitms(100);
@@ -70,6 +74,7 @@ void main(void)
          LED5_Neg();
          WAIT1_Waitms(100);
        }
+#endif
   /* For example: for(;;) { } */
 
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
