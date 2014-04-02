@@ -5,7 +5,7 @@
 **     Component   : Events
 **     Version     : Driver 01.02
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2014-02-25, 09:25, # CodeGen: 0
+**     Date/Time   : 2014-02-17, 11:36, # CodeGen: 0
 **     Abstract    :
 **         This is user's event module.
 **         Put your event handler code here.
@@ -44,26 +44,12 @@
 #include "LEDpin4.h"
 #include "LED5.h"
 #include "LEDpin5.h"
-#include "WAIT1.h"
 #include "CS1.h"
+#include "WAIT1.h"
 #include "TI1.h"
 #include "KB1.h"
+#include "BUZ1.h"
 
-
-void KB1_OnInterrupt(void);
-/*
-** ===================================================================
-**     Event       :  KB1_OnInterrupt (module Events)
-**
-**     Component   :  KB1 [KBI]
-**     Description :
-**         This event is called when the active signal edge/level
-**         occurs. This event is enabled only if <Interrupt
-**         service/event> property is enabled.
-**     Parameters  : None
-**     Returns     : Nothing
-** ===================================================================
-*/
 
 void TI1_OnInterrupt(void);
 /*
@@ -76,6 +62,21 @@ void TI1_OnInterrupt(void);
 **         when the component is enabled - <Enable> and the events are
 **         enabled - <EnableEvent>). This event is enabled only if a
 **         <interrupt service/event> is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void KB1_OnInterrupt(void);
+/*
+** ===================================================================
+**     Event       :  KB1_OnInterrupt (module Events)
+**
+**     Component   :  KB1 [KBI]
+**     Description :
+**         This event is called when the active signal edge/level
+**         occurs. This event is enabled only if <Interrupt
+**         service/event> property is enabled.
 **     Parameters  : None
 **     Returns     : Nothing
 ** ===================================================================

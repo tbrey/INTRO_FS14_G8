@@ -15,6 +15,9 @@
 #if PL_HAS_KEYS
   #include "Keys.h"
 #endif
+#if PL_HAS_BUZZER
+  #include "Buzzer.h"
+#endif
 
 static void APP_EvntHandler(EVNT_Handle event) {
   switch(event) { 
@@ -26,12 +29,15 @@ static void APP_EvntHandler(EVNT_Handle event) {
 
 #if PL_HAS_LED_HEARTBEAT
     case EVNT_LED_HEARTBEAT:
-      LED1_Neg();
+      LED3_Neg();
       break;
 #endif
 #if PL_NOF_KEYS>=1
   case EVNT_SW1_PRESSED:
     LED1_Neg();
+#if PL_HAS_BUZZER
+  (void)BUZ_Beep(300, 500);
+#endif
     break;
 #endif
 #if PL_NOF_KEYS>=2

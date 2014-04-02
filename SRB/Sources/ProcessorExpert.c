@@ -44,6 +44,7 @@
 #include "CS1.h"
 #include "TI1.h"
 #include "KB1.h"
+#include "BUZ1.h"
 /* Include shared modules, which are used for whole project */
 #include "PE_Types.h"
 #include "PE_Error.h"
@@ -51,6 +52,7 @@
 #include "IO_Map.h"
 
 /* User includes (#include below this line is not maintained by Processor Expert) */
+#include "Application.h"
 
 void main(void)
 {
@@ -59,24 +61,15 @@ void main(void)
   /*** Processor Expert internal initialization. DON'T REMOVE THIS CODE!!! ***/
   PE_low_level_init();
   /*** End of Processor Expert internal initialization.                    ***/
-
-  /* Write your code here */
 #if 0
-  for(;;) {					/* XXX Endlos Lauflicht laufen lassen */
-         LED1_Neg();
-         WAIT1_Waitms(100);
-         LED2_Neg();
-         WAIT1_Waitms(100);
-         LED3_Neg();
-         WAIT1_Waitms(100); 
-         LED4_Neg();
-         WAIT1_Waitms(100);
-         LED5_Neg();
-         WAIT1_Waitms(100);
-       }
+  LED1_On();
+  LED2_On();
+  LED3_On();
+  LED4_On();
+  LED5_On();
 #endif
-  /* For example: for(;;) { } */
-
+  APP_Run();
+  
   /*** Don't write any code pass this line, or it will be deleted during code generation. ***/
   /*** RTOS startup code. Macro PEX_RTOS_START is defined by the RTOS component. DON'T MODIFY THIS CODE!!! ***/
   #ifdef PEX_RTOS_START

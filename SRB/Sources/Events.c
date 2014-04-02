@@ -5,7 +5,7 @@
 **     Component   : Events
 **     Version     : Driver 01.02
 **     Compiler    : CodeWarrior HCS08 C Compiler
-**     Date/Time   : 2014-02-25, 09:25, # CodeGen: 0
+**     Date/Time   : 2014-02-17, 11:36, # CodeGen: 0
 **     Abstract    :
 **         This is user's event module.
 **         Put your event handler code here.
@@ -80,6 +80,7 @@ void KB1_OnInterrupt(void)
   KEY_OnInterrupt();
 #endif
 }
+
 /* END Events */
 
 /*!

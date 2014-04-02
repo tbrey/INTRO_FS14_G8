@@ -12,6 +12,9 @@
 #if PL_HAS_EVENTS
   #include "Event.h"
 #endif
+#if PL_HAS_TRIGGER
+  #include "Trigger.h"
+#endif
 
 void TMR_OnInterrupt(void) {
   /* this one gets called from an interrupt!!!! */
@@ -25,6 +28,9 @@ void TMR_OnInterrupt(void) {
     EVNT_SetEvent(EVNT_LED_HEARTBEAT);
     cnt = 0; /* reset counter */
   }
+#endif
+#if PL_HAS_TRIGGER
+  TRG_IncTick();
 #endif
 }
 
