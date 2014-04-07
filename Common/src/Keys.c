@@ -13,43 +13,37 @@
 #if PL_HAS_EVENTS
   #include "Event.h"
 #endif
+#if PL_HAS_DEBOUNCE
+  #include "Debounce.h"
+  #include "KeyDebounce.h"
+#endif
 
 void KEY_Scan(void) {
   /*! \todo Implement handling of keys */
-#if PL_NOF_KEYS > 0
-	if (KEY1_Get()) {
-		WAIT1_Waitms(50); /* simple debounce */
-		if (KEY1_Get()) { /* still pressed? */
-			EVNT_SetEvent(EVNT_SW1_PRESSED);
-			WAIT1_Waitms(200);
-		}
-	}
+#if PL_HAS_DEBOUNCE
+  KEYDBNC_Scan();
+#else
+#if PL_NOF_KEYS >= 1
+  if (KEY1_Get()) { /* key pressed */
+    EVNT_SetEvent(EVNT_SW1_PRESSED);
+  }
 #endif
-#if PL_NOF_KEYS > 1
-	if (KEY2_Get()) {
-		WAIT1_Waitms(50); /* simple debounce */
-		if (KEY2_Get()) { /* still pressed? */
-			EVNT_SetEvent(EVNT_SW2_PRESSED);
-			WAIT1_Waitms(200);
-		}
-	}
+#if PL_NOF_KEYS >= 2
+  if (KEY2_Get()) { /* key pressed */
+    EVNT_SetEvent(EVNT_SW2_PRESSED);
+  }
 #endif
-#if PL_NOF_KEYS > 2
-	if (KEY3_Get()) {
-		WAIT1_Waitms(50); /* simple debounce */
-		if (KEY3_Get()) { /* still pressed? */
-			EVNT_SetEvent(EVNT_SW3_PRESSED);
-		}
-	}
+#if PL_NOF_KEYS >= 3
+  if (KEY3_Get()) { /* key pressed */
+    EVNT_SetEvent(EVNT_SW3_PRESSED);
+  }
 #endif
-#if PL_NOF_KEYS > 3
-	if (KEY4_Get()) {
-		WAIT1_Waitms(50); /* simple debounce */
-		if (KEY4_Get()) { /* still pressed? */
-			EVNT_SetEvent(EVNT_SW4_PRESSED);
-		}
-	}
+#if PL_NOF_KEYS >= 4
+  if (KEY4_Get()) { /* key pressed */
+    EVNT_SetEvent(EVNT_SW4_PRESSED);
+  }
 #endif
+#endif /* PL_HAS_DEBOUNCE */
 }
 
 #if PL_HAS_KBI
