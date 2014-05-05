@@ -177,6 +177,23 @@ void FRTOS1_vApplicationMallocFailedHook(void)
   for(;;) {}
 }
 
+/*
+** ===================================================================
+**     Event       :  _OnTraceWrap0 (module Events)
+**
+**     Component   :  RTOSTRC1 [PercepioTrace]
+**     Description :
+**         Called for trace ring buffer wrap around. This gives the
+**         application a chance to dump the trace buffer.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void _OnTraceWrap0(void)
+{
+  /* Write your code here ... */
+}
+
 /* END Events */
 
 /*!

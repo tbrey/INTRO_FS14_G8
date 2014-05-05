@@ -35,6 +35,12 @@
 #if PL_HAS_SEMAPHORE
   #include "Sem.h"
 #endif
+#if PL_HAS_SHELL
+  #include "Shell.h"
+#endif
+#if PL_HAS_SHELL_QUEUE
+  #include "ShellQueue.h"
+#endif
 
 #if PL_HAS_LED
 static void PL_LedInit(void) {
@@ -106,9 +112,21 @@ void PL_Init(void) {
 #if PL_HAS_SEMAPHORE
   SEM_Init();
 #endif
+#if PL_HAS_SHELL
+  SHELL_Init();
+#endif
+#if PL_HAS_SHELL_QUEUE
+  SQUEUE_Init();
+#endif
 }
 
 void PL_Deinit(void) {
+#if PL_HAS_SHELL_QUEUE
+  SQUEUE_Deinit();
+#endif
+#if PL_HAS_SHELL
+  SHELL_Deinit();
+#endif
 #if PL_HAS_SEMAPHORE
   SEM_Deinit();
 #endif

@@ -50,9 +50,12 @@
 #include "KB1.h"
 #include "BUZ1.h"
 #include "UTIL1.h"
+#include "CLS1.h"
+#include "AS1.h"
 #include "FRTOS1.h"
-#include "Vswi.h"
-#include "TickCntr1.h"
+#include "RTOSTRC1.h"
+#include "RTOSSWI2.h"
+#include "TickCntr2.h"
 
 
 void TI1_OnInterrupt(void);
@@ -140,6 +143,20 @@ void FRTOS1_vApplicationMallocFailedHook(void);
 **     Description :
 **         If enabled, the RTOS will call this hook in case memory
 **         allocation failed.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void _OnTraceWrap0(void);
+/*
+** ===================================================================
+**     Event       :  _OnTraceWrap0 (module Events)
+**
+**     Component   :  RTOSTRC1 [PercepioTrace]
+**     Description :
+**         Called for trace ring buffer wrap around. This gives the
+**         application a chance to dump the trace buffer.
 **     Parameters  : None
 **     Returns     : Nothing
 ** ===================================================================

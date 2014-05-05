@@ -29,6 +29,9 @@
 #if PL_HAS_RTOS_TRACE
   #include "RTOSTRC1.h"
 #endif
+
+
+
 static void APP_EvntHandler(EVNT_Handle event) {
   switch(event) { 
     case EVNT_INIT:
@@ -73,6 +76,8 @@ static void APP_EvntHandler(EVNT_Handle event) {
 
 #if PL_HAS_RTOS
 static portTASK_FUNCTION(MainTask, pvParameters) {
+  uint16_t msCnt;
+  
   (void)pvParameters; /* parameter not used */
   for(;;) {
     EVNT_HandleEvent(APP_EvntHandler);
@@ -80,6 +85,11 @@ static portTASK_FUNCTION(MainTask, pvParameters) {
     KEY_Scan(); /* poll keys */
 #endif
     FRTOS1_vTaskDelay(20/portTICK_RATE_MS);
+    msCnt += 20;
+    if (msCnt>1000) {
+      LED1_Neg();
+      msCnt = 0;
+    }
   }
 }
 #else
