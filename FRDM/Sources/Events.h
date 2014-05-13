@@ -36,21 +36,18 @@
 #include "IO_Map.h"
 #include "LED1.h"
 #include "LEDpin1.h"
-#include "BitIoLdd1.h"
 #include "TU1.h"
 #include "LED2.h"
 #include "LEDpin2.h"
-#include "BitIoLdd2.h"
 #include "LED3.h"
 #include "LEDpin3.h"
-#include "BitIoLdd3.h"
 #include "WAIT1.h"
 #include "CS1.h"
-#include "TI1.h"
 #include "TimerIntLdd1.h"
+#include "TU_US.h"
+#include "TRIG.h"
 #include "HF1.h"
 #include "SW1.h"
-#include "BitIoLdd4.h"
 #include "BUZ1.h"
 #include "BitIoLdd5.h"
 #include "UTIL1.h"
@@ -69,12 +66,41 @@
 #include "IR2.h"
 #include "BitIoLdd8.h"
 #include "IR3.h"
+#include "BitIoLdd13.h"
 #include "BitIoLdd9.h"
 #include "IR4.h"
+#include "BitIoLdd14.h"
 #include "BitIoLdd10.h"
 #include "IR5.h"
+#include "BitIoLdd15.h"
 #include "BitIoLdd11.h"
 #include "IR6.h"
+#include "BitIoLdd16.h"
+#include "MOTTU.h"
+#include "DIRL.h"
+#include "BitIoLdd17.h"
+#include "PWML.h"
+#include "PwmLdd2.h"
+#include "DIRR.h"
+#include "BitIoLdd18.h"
+#include "PWMR.h"
+#include "PwmLdd1.h"
+#include "I2C1.h"
+#include "MMA1.h"
+#include "GI2C1.h"
+#include "IFsh1.h"
+#include "IntFlashLdd1.h"
+#include "Q4CLeft.h"
+#include "C11.h"
+#include "BitIoLdd19.h"
+#include "C21.h"
+#include "BitIoLdd20.h"
+#include "Q4CRight.h"
+#include "C12.h"
+#include "BitIoLdd22.h"
+#include "C23.h"
+#include "BitIoLdd23.h"
+#include "QuadInt.h"
 #include "BitIoLdd12.h"
 #include "FRTOS1.h"
 
@@ -186,6 +212,92 @@ void FRTOS1_vOnPreSleepProcessing(portTickType expectedIdleTicks);
 **         NAME            - DESCRIPTION
 **         expectedIdleTicks - expected idle
 **                           time, in ticks
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+/*
+** ===================================================================
+**     Event       :  TU_US_OnCounterRestart (module Events)
+**
+**     Component   :  TU_US [TimerUnit_LDD]
+*/
+/*!
+**     @brief
+**         Called if counter overflow/underflow or counter is
+**         reinitialized by modulo or compare register matching.
+**         OnCounterRestart event and Timer unit must be enabled. See
+**         [SetEventMask] and [GetEventMask] methods. This event is
+**         available only if a [Interrupt] is enabled.
+**     @param
+**         UserDataPtr     - Pointer to the user or
+**                           RTOS specific data. The pointer passed as
+**                           the parameter of Init method.
+*/
+/* ===================================================================*/
+void TU_US_OnCounterRestart(LDD_TUserData *UserDataPtr);
+
+/*
+** ===================================================================
+**     Event       :  TU_US_OnChannel0 (module Events)
+**
+**     Component   :  TU_US [TimerUnit_LDD]
+*/
+/*!
+**     @brief
+**         Called if compare register match the counter registers or
+**         capture register has a new content. OnChannel0 event and
+**         Timer unit must be enabled. See [SetEventMask] and
+**         [GetEventMask] methods. This event is available only if a
+**         [Interrupt] is enabled.
+**     @param
+**         UserDataPtr     - Pointer to the user or
+**                           RTOS specific data. The pointer passed as
+**                           the parameter of Init method.
+*/
+/* ===================================================================*/
+void TU_US_OnChannel0(LDD_TUserData *UserDataPtr);
+
+/*
+** ===================================================================
+**     Event       :  QuadInt_OnInterrupt (module Events)
+**
+**     Component   :  QuadInt [TimerInt]
+**     Description :
+**         When a timer interrupt occurs this event is called (only
+**         when the component is enabled - <Enable> and the events are
+**         enabled - <EnableEvent>). This event is enabled only if a
+**         <interrupt service/event> is enabled.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+void QuadInt_OnInterrupt(void);
+
+void GI2C1_OnRequestBus(void);
+/*
+** ===================================================================
+**     Event       :  GI2C1_OnRequestBus (module Events)
+**
+**     Component   :  GI2C1 [GenericI2C]
+**     Description :
+**         User event which will be called before accessing the I2C bus.
+**         Useful for starting a critical section.
+**     Parameters  : None
+**     Returns     : Nothing
+** ===================================================================
+*/
+
+void GI2C1_OnReleaseBus(void);
+/*
+** ===================================================================
+**     Event       :  GI2C1_OnReleaseBus (module Events)
+**
+**     Component   :  GI2C1 [GenericI2C]
+**     Description :
+**         User event which will be called after accessing the I2C bus.
+**         Useful for ending a critical section.
+**     Parameters  : None
 **     Returns     : Nothing
 ** ===================================================================
 */

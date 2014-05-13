@@ -18,11 +18,28 @@ static xQueueHandle SQUEUE_Queue;
 
 void SQUEUE_SendString(const unsigned char *str) {
   /*! \todo Implement function */
+  while(*str!='\0') {
+    if (FRTOS1_xQueueSendToBack(SQUEUE_Queue, str, portMAX_DELAY)!=pdPASS) {
+      for(;;){} /* ups? */
+    }
+    str++;
+  }
 }
 
 unsigned char SQUEUE_ReceiveChar(void) {
+#if 0
   /*! \todo Implement function */
-  return '\0';
+#else
+  unsigned char ch;
+  portBASE_TYPE res;
+
+  res = FRTOS1_xQueueReceive(SQUEUE_Queue, &ch, 0);
+  if (res==errQUEUE_EMPTY) {
+    return '\0';
+  } else {
+    return ch;
+  }
+#endif
 }
 
 unsigned short SQUEUE_NofElements(void) {
@@ -35,8 +52,11 @@ void SQUEUE_Deinit(void) {
 
 void SQUEUE_Init(void) {
   SQUEUE_Queue = FRTOS1_xQueueCreate(SQUEUE_LENGTH, SQUEUE_ITEM_SIZE);
+#if PL_HAS_RTOS_TRACE
+  RTOSTRC1_vTraceSetQueueName(SQUEUE_Queue, "ShellQueue");
+#endif
   if (SQUEUE_Queue==NULL) {
     for(;;){} /* out of memory? */
   }
 }
-#endif /* PL_HAS_QUEUE */
+#endif /* PL_HAS_SHELL_QUEUE */

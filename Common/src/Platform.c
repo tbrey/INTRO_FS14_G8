@@ -41,6 +41,39 @@
 #if PL_HAS_SHELL_QUEUE
   #include "ShellQueue.h"
 #endif
+#if PL_HAS_LINE_SENSOR
+  #include "Reflectance.h"
+#endif
+#if PL_HAS_MOTOR
+  #include "Motor.h"
+#endif
+#if PL_HAS_ACCEL
+  #include "Accel.h"
+#endif
+#if PL_HAS_RTOS_TRACE
+  #include "RTOSTRC1.h"
+#endif
+#if PL_HAS_MOTOR_TACHO
+  #include "Tacho.h"
+#endif
+#if PL_HAS_SHELL_TRACE
+  #include "ShellTrace.h"
+#endif
+#if PL_HAS_PID
+  #include "Pid.h"
+#endif
+#if PL_HAS_DRIVE
+  #include "Drive.h"
+#endif
+#if PL_HAS_ULTRASONIC
+  #include "Ultrasonic.h"
+#endif
+#if PL_HAS_RADIO
+  #include "RNet_App.h"
+#endif
+#if PL_HAS_REMOTE
+  #include "Remote.h"
+#endif
 
 #if PL_HAS_LED
 static void PL_LedInit(void) {
@@ -118,9 +151,74 @@ void PL_Init(void) {
 #if PL_HAS_SHELL_QUEUE
   SQUEUE_Init();
 #endif
+#if PL_HAS_LINE_SENSOR
+  REF_Init();
+#endif
+#if PL_HAS_MOTOR
+  MOT_Init();
+#endif
+#if PL_HAS_ACCEL
+  ACCEL_Init();
+#endif
+#if PL_HAS_RTOS_TRACE
+  if (RTOSTRC1_uiTraceStart()==0) {
+    for(;;){} /* error starting trace recorder. Not setup for enough queues/tasks/etc? */
+  }
+#endif
+#if PL_HAS_MOTOR_TACHO
+  TACHO_Init();
+#endif
+#if PL_HAS_SHELL_TRACE
+  TRACE_Init();
+#endif
+#if PL_HAS_PID
+  PID_Init();
+#endif
+#if PL_HAS_DRIVE
+  DRV_Init();
+#endif
+#if PL_HAS_ULTRASONIC
+  US_Init();
+#endif
+#if PL_HAS_RADIO
+  RNETA_Init();
+#endif
+#if PL_HAS_REMOTE
+  REMOTE_Init();
+#endif
 }
 
 void PL_Deinit(void) {
+#if PL_HAS_REMOTE
+  REMOTE_Deinit();
+#endif
+#if PL_HAS_RADIO
+  RNETA_Deinit();
+#endif
+#if PL_HAS_ULTRASONIC
+  US_Deinit();
+#endif
+#if PL_HAS_DRIVE
+  DRV_Deinit();
+#endif
+#if PL_HAS_PID
+  PID_Init();
+#endif
+#if PL_HAS_MOTOR_TACHO
+  TACHO_Deinit();
+#endif
+#if PL_HAS_SHELL_TRACE
+  TRACE_Deinit();
+#endif
+#if PL_HAS_ACCEL
+  ACCEL_Deinit();
+#endif
+#if PL_HAS_MOTOR
+  MOT_Deinit();
+#endif
+#if PL_HAS_LINE_SENSOR
+  REF_Deinit();
+#endif
 #if PL_HAS_SHELL_QUEUE
   SQUEUE_Deinit();
 #endif
